@@ -287,6 +287,7 @@ class _AppBarPlacesAutoCompleteTextFieldState
         alignment: Alignment.topLeft,
         margin: const EdgeInsets.only(top: 4.0),
         child: TextField(
+          textAlignVertical: TextAlignVertical.center,
           controller: state._queryTextController,
           autofocus: true,
           style: widget.textStyle ?? _defaultStyle(),
@@ -354,10 +355,28 @@ class PredictionsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: predictions
-          .map((Prediction p) => PredictionTile(prediction: p, onTap: onTap))
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 1), // changes position of shadow
+            )
+          ],
+        ),
+        child: ListView(
+          shrinkWrap: true,
+          children: predictions
+              .map((Prediction p) => PredictionTile(prediction: p, onTap: onTap))
+              .toList(),
+        ),
+      ),
     );
   }
 }

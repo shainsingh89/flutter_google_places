@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
 
-const kGoogleApiKey = "API_KEY";
+const kGoogleApiKey = "AIzaSyDmq2kABzJMWf1QqaNOX4Qw49CXYNzHI04";
 
 main() {
   runApp(const RoutesWidget());
@@ -113,17 +113,20 @@ class _MyAppState extends State<MyApp> {
       apiKey: kGoogleApiKey,
       onError: onError,
       mode: _mode!,
-      language: "fr",
+      language: "en",
+      region: "rw",
+      types : const [],
+      strictbounds: true,
       decoration: InputDecoration(
         hintText: 'Search',
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(
             color: Colors.white,
           ),
         ),
       ),
-      components: [Component(Component.country, "fr")],
+      components: [Component(Component.country, "rw"),Component(Component.country, "gh")],
     );
 
     displayPrediction(p, context);
@@ -168,7 +171,7 @@ class CustomSearchScaffold extends PlacesAutocompleteWidget {
 class _CustomSearchScaffoldState extends PlacesAutocompleteState {
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(title: const AppBarPlacesAutoCompleteTextField());
+    final appBar = AppBar(title: AppBarPlacesAutoCompleteTextField());
     final body = PlacesAutocompleteResult(
       onTap: (p) {
         displayPrediction(p, context);
